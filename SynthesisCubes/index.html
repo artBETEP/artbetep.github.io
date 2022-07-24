@@ -11,47 +11,10 @@
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", {onProgress: UnityProgress});
     </script>
-	<script src="https://yandex.ru/games/sdk/v2"></script>
-
-
-<!-- Запуск рекламы при старте игры -->
-<script type="text/javascript">
-  var player;
-  var sdk;
-  var payments = null;
-
-
-  YaGames.init({
-    adv: {
-      onAdvClose: wasShown => {
-        console.info('adv closed!');
-      }
-    }
-  })
-    .then(ysdk => {
-      sdk = ysdk;
-      sdk.adv.showFullscreenAdv({ callbacks: {} });
-    });
-</script>
-<!-- Обработка рекламы в нужное время -->
-<script>
-  function showFullscrenAd() {
-    sdk.adv.showFullscreenAdv({
-      callbacks: {
-        onClose: function (wasShown) {
-          unityInstance.SendMessage('YandexSDK', 'OnInterstitialShown');
-        },
-        onError: function (error) {
-          unityInstance.SendMessage('YandexSDK', 'OnInterstitialFailed', error);
-        }
-      }
-    })
-  }
-</script>
   </head>
   <body>
     <div class="webgl-content">
-      <div id="unityContainer" style="width: 400px; height: 600px"></div>
+      <div id="unityContainer" style="width: 400px; height: 700px"></div>
       <div class="footer">
         <div class="webgl-logo"></div>
         <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
